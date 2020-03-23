@@ -1,0 +1,24 @@
+<div>
+    <div>
+        <div class="form-group">
+            <label for="identificacao">Identificação</label>
+            <input type="text" name="identificacao" id="identificacao" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="tipo">Tipo</label>
+            <select name="tipo" id="tipo" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dados">Coordenador</label>
+            <select name="dados" id="dados" class="form-control">
+                {{#if data}}
+                {{#each data}}
+                <option value="{{id}}">{{nome}}</option>
+                {{/each}}
+                {{/if}}
+            </select>
+        </div>
+    </div>
+</div>

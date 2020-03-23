@@ -11,7 +11,7 @@ exports.curso = (req, res) => {
                     nome: result.rows[i].nome
                 });
             }
-            res.render("curso", { data: values });
+            res.render("curso", { title: "Curso", data: values });
         });
     });
 }

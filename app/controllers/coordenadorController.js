@@ -14,7 +14,7 @@ exports.coordenador = (req, res) => {
                     ativo: result.rows[i].ativo == false ? "Inativo" : "Ativo"
                 });
             }
-            res.render("coordenador", { data: values });
+            res.render("coordenador", { title: "Coordenador", data: values });
         });
     });
 };
@@ -57,5 +57,5 @@ exports.remover = (req, res) => {
     var values = [req.params.id];
 
     coordenador.executar(text, values, connection);
-    res.render("coordenador", { data: values });
+    res.render("coordenador", { title: "Coordenador", data: values });
 }

@@ -1,3 +1,3 @@
 exports.aluno = (req, res) => {
-    res.render("aluno");
+    res.render("aluno", { title: "Aluno" });
 }
