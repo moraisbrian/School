@@ -1,17 +1,8 @@
 const connection = require("../../config/dbConnection");
+const cursoModel = require("../models/cursoModel");
 
 exports.curso = (req, res) => {
-    connection.connect((err, client, release) => {
-        client.query("select * from coordenador", (err, result) => {
-            release();
-            let values = [];
-            for (var i = 0; i < result.rows.length; i++) {
-                values.push({
-                    id: result.rows[i].id,
-                    nome: result.rows[i].nome
-                });
-            }
-            res.render("curso", { title: "Curso", data: values });
-        });
-    });
+    var curso = new cursoModel();
+    var text = "select * from coordenador";
+    curso.getCoordenador(text, connection, res);
 }
