@@ -5,21 +5,21 @@ CREATE TABLE coordenador(
     nome varchar(50) not null,
     sobrenome varchar(50) not null,
     ativo bool,
-    dataCadastro date
+    dataCadastro timestamp default now()
 );
 
 CREATE TABLE tipo_curso(
     id serial primary key,
     identificacao varchar(50) not null,
     ativo bool,
-    dataCadastro date
+    dataCadastro timestamp default now()
 );
 
 CREATE TABLE curso(
     id serial primary key,
     identificacao varchar(50),
     ativo bool,
-    dataCadastro date,
+    dataCadastro timestamp default now(),
     tipoId int,
     coordenadorId int,
     constraint fk_tipo foreign key (tipoId)
