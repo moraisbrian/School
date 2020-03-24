@@ -1,6 +1,9 @@
 <div>
     <div>
-        <form action="/curso">
+        <form action="/curso" method="post" id="frmCurso">
+            <div class="form-group">
+                <input type="hidden" id="id" name="id" value="0">
+            </div>
             <div class="form-group">
                 <label for="identificacao">Identificação</label>
                 <input type="text" name="identificacao" id="identificacao" class="form-control">
@@ -13,8 +16,56 @@
                 <label for="dados">Coordenador</label>
                 <select name="selectCoordenador" id="selectCoordenador" class="form-control"></select>
             </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="ativo" name="ativo">
+                <label class="form-check-label" for="ativo">Ativo</label>
+            </div>
             <input type="submit" value="Enviar" id="btnEnviar" class="btn btn-primary">
         </form>
     </div>
     <hr>
+    <div>
+        {{#if data}}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Identificação</th>
+                    <th scope="col">Coordenador</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                <tr>
+                    <td>
+                        {{id}}
+                    </td>
+                    <td>
+                        {{identificacao}}
+                    </td>
+                    <td>
+                        {{coordenador}}
+                    </td>
+                    <td>
+                        {{tipo}}
+                    </td>
+                    <td>
+                        {{ativo}}
+                    </td>
+                    <td>
+                        <button value="{{id}}" class="btnDeletarCurso btn btn-danger">Deletar</button>
+                    </td>
+                    <td>
+                        <button value="{{id}}" class="btnAtualizarCurso btn btn-warning">Atualizar</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{/if}}
+    </div>
 </div>

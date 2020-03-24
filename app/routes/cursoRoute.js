@@ -13,4 +13,16 @@ router.get("/tipo", (req, res) => {
     controller.getTipo(req, res);
 });
 
+router.post("/", (req, res) => {
+    controller.salvar(req, res);
+});
+
+router.get("/:id", (req, res) => {
+    controller.getOne(req, res);
+});
+
+router.delete("/:id", (req, res) => {
+    controller.remover(req, res);
+});
+
 module.exports = router;

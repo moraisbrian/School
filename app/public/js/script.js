@@ -59,7 +59,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#frmCoordenador").on("submit", function(e) {
+	$("#frmCoordenador").on("submit", function (e) {
 		e.preventDefault();
 		var form = $(this);
 		$.ajax({
@@ -72,7 +72,7 @@ $(document).ready(function () {
 				ativo: form.find("input[name='ativo']").prop("checked") ? true : false
 			}
 		})
-		.done(function() {
+		.done(function () {
 			window.location.href = "/coordenador";
 		});
 	});
@@ -115,7 +115,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#frmTipoCurso").on("submit", function(e) {
+	$("#frmTipoCurso").on("submit", function (e) {
 		e.preventDefault();
 		var form = $(this);
 		$.ajax({
@@ -127,39 +127,102 @@ $(document).ready(function () {
 				ativo: form.find("input[name='ativo']").prop("checked") ? true : false
 			}
 		})
-		.done(function() {
+		.done(function () {
 			window.location.href = "/tipocurso";
 		});
 	});
 	//#endregion
 
 	//#region Curso
-	$.ajax({
-		url: "/curso/coordenador",
-		type: "GET",
-		success: function (data) {
-			for (var i = 0; i < data.length; i++) {
-				var conteudo = "<option value=\"";
-				conteudo += data[i].id;
-				conteudo += "\">";
-				conteudo += data[i].nome;
-				conteudo += "</option>";
-				$("#selectCoordenador").append(conteudo);
+	function loadCombobox() {
+		$.ajax({
+			url: "/curso/coordenador",
+			type: "GET",
+			success: function (data) {
+				for (var i = 0; i < data.length; i++) {
+					var conteudo = "<option value=\"";
+					conteudo += data[i].id;
+					conteudo += "\">";
+					conteudo += data[i].nome;
+					conteudo += "</option>";
+					$("#selectCoordenador").append(conteudo);
+				}
 			}
+		});
+
+		$.ajax({
+			url: "/curso/tipo",
+			type: "GET",
+			success: function (data) {
+				for (var i = 0; i < data.length; i++) {
+					var conteudo = "<option value=\"";
+					conteudo += data[i].id;
+					conteudo += "\">";
+					conteudo += data[i].identificacao;
+					conteudo += "</option>";
+					$("#selectTipo").append(conteudo);
+				}
+			}
+		});
+	}
+	loadCombobox();
+
+	$("#frmCurso").on("submit", function (e) {
+		e.preventDefault();
+		var form = $(this);
+		$.ajax({
+			url: "/curso",
+			type: "POST",
+			data: {
+				id: form.find("input[name='id']").val(),
+				identificacao: form.find("input[name='identificacao']").val(),
+				tipo: form.find("#selectTipo").val(),
+				coordenador: form.find("#selectCoordenador").val(),
+				ativo: form.find("input[name='ativo']").prop("checked") ? true : false
+			}
+		})
+		.done(function () {
+			window.location.href = "/curso";
+		});
+	});
+
+	$(".btnAtualizarCurso").on("click", function () {
+		let resposta = confirm("Deseja realmente atualizar?");
+		if (resposta) {
+			let valor = this.value;
+			$.ajax({
+				url: "/curso/" + valor,
+				type: "GET",
+				success: function (data) {
+					loadCombobox();
+					$("#id").val(data.id);
+					$("#identificacao").val(data.identificacao);
+					$("#selectTipo").val(data.tipoid);
+					$("#selectTipo").text(data.tipo);
+					$("#selectCoordenador").val(data.coordenadorid);
+					$("#selectCoordenador").text(data.coordenador);
+					if (Boolean(data.ativo)) {
+						$("#ativo").prop("checked", true);
+					} else {
+						$("#ativo").prop("checked", false);
+					}
+				}
+			});
 		}
 	});
 
-	$.ajax({
-		url: "/curso/tipo",
-		type: "GET",
-		success: function (data) {
-			for (var i = 0; i < data.length; i++) {
-				var conteudo = "<option value=\"";
-				conteudo += data[i].id;
-				conteudo += "\">";
-				conteudo += data[i].identificacao;
-				conteudo += "</option>";
-				$("#selectTipo").append(conteudo);
+	$(".btnDeletarCurso").on("click", function () {
+		let resposta = confirm("Deseja realmente deletar?");
+		if (resposta) {
+			if (this.value != "") {
+				var valor = this.value;
+				$.ajax({
+					url: "/curso/" + valor,
+					type: "DELETE"
+				})
+				.done(function () {
+					window.location.href = "/curso";
+				});
 			}
 		}
 	});
