@@ -25,7 +25,7 @@ $(document).ready(function () {
 					type: "DELETE"
 				})
 				.done(function () {
-					window.location.reload();
+					window.location.href = "/coordenador";
 				});
 			}
 		}
@@ -50,5 +50,23 @@ $(document).ready(function () {
 				}
 			});
 		}
+	});
+
+	$("#frmCoordenador").on("submit", function(e) {
+		e.preventDefault();
+		var form = $(this);
+		$.ajax({
+			url: "/coordenador",
+			type: "POST",
+			data: {
+				id: form.find("input[name='id']").val(),
+				nome: form.find("input[name='nome']").val(),
+				sobrenome: form.find("input[name='sobrenome']").val(),
+				ativo: form.find("input[name='ativo']").prop("checked") ? true : false
+			}
+		})
+		.done(function() {
+			window.location.href = "/coordenador";
+		});
 	});
 });
