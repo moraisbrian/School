@@ -132,4 +132,36 @@ $(document).ready(function () {
 		});
 	});
 	//#endregion
+
+	//#region Curso
+	$.ajax({
+		url: "/curso/coordenador",
+		type: "GET",
+		success: function (data) {
+			for (var i = 0; i < data.length; i++) {
+				var conteudo = "<option value=\"";
+				conteudo += data[i].id;
+				conteudo += "\">";
+				conteudo += data[i].nome;
+				conteudo += "</option>";
+				$("#selectCoordenador").append(conteudo);
+			}
+		}
+	});
+
+	$.ajax({
+		url: "/curso/tipo",
+		type: "GET",
+		success: function (data) {
+			for (var i = 0; i < data.length; i++) {
+				var conteudo = "<option value=\"";
+				conteudo += data[i].id;
+				conteudo += "\">";
+				conteudo += data[i].identificacao;
+				conteudo += "</option>";
+				$("#selectTipo").append(conteudo);
+			}
+		}
+	});
+	//#endregion
 });
