@@ -4,21 +4,21 @@ CREATE TABLE coordenador(
     id serial primary key,
     nome varchar(50) not null,
     sobrenome varchar(50) not null,
-    ativo bool,
+    ativo boolean,
     dataCadastro timestamp default now()
 );
 
 CREATE TABLE tipo_curso(
     id serial primary key,
     identificacao varchar(50) not null,
-    ativo bool,
+    ativo boolean,
     dataCadastro timestamp default now()
 );
 
 CREATE TABLE curso(
     id serial primary key,
     identificacao varchar(50),
-    ativo bool,
+    ativo boolean,
     dataCadastro timestamp default now(),
     tipoId int,
     coordenadorId int,
