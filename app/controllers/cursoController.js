@@ -16,7 +16,7 @@ exports.curso = (req, res) => {
     text += "on curso.tipoid = tipo_curso.id ";
     text += "inner join coordenador ";
     text += "on curso.coordenadorid = coordenador.id";
-    curso.getAll(text, connection, res);
+    curso.getAll(text, connection, res, req);
 }
 
 exports.getCoordenador = (req, res) => {
@@ -88,5 +88,10 @@ exports.remover = (req, res) => {
     var values = [req.params.id];
 
     curso.executar(text, values, connection);
-    res.render("curso", { title: "Curso", script: "cursoScript", data: values });
+    res.render("curso", { 
+        title: "Curso", 
+        script: "cursoScript", 
+        data: values,
+        usuarioLogado: req.session.usuario 
+    });
 }

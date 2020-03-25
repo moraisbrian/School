@@ -15,7 +15,7 @@ exports.aluno = (req, res) => {
     text += "from aluno ";
     text += "inner join curso ";
     text += "on curso.id = aluno.cursoid "
-    aluno.getAll(text, connection, res);
+    aluno.getAll(text, connection, res, req);
 }
 
 exports.getOneAluno = (req, res) => {
@@ -67,7 +67,12 @@ exports.remover = (req, res) => {
     var values = [req.params.id];
 
     aluno.executar(text, values, connection);
-    res.render("aluno", { title: "Aluno", script: "alunoScript", data: values });
+    res.render("aluno", { 
+        title: "Aluno", 
+        script: "alunoScript", 
+        data: values,
+        usuarioLogado: req.session.usuario 
+    });
 }
 
 exports.getCurso = (req, res) => {

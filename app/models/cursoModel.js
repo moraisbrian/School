@@ -44,7 +44,7 @@ Curso.prototype.executar = (text, values, conn) => {
     });
 }
 
-Curso.prototype.getAll = (text, conn, res) => {
+Curso.prototype.getAll = (text, conn, res, req) => {
     conn.connect((err, client, release) => {
         client.query(text, (err, result) => {
             release();
@@ -58,7 +58,12 @@ Curso.prototype.getAll = (text, conn, res) => {
                     ativo: result.rows[i].ativo == false ? "Inativo" : "Ativo"
                 });
             }
-            res.render("curso", { title: "Curso", script: "cursoScript", data: values });
+            res.render("curso", { 
+                title: "Curso", 
+                script: "cursoScript", 
+                data: values,
+                usuarioLogado: req.session.usuario 
+            });
         });
     });
 }

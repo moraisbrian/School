@@ -31,7 +31,7 @@ Coordenador.prototype.getOne = (text, values, conn, res) => {
     });
 }
 
-Coordenador.prototype.getAll = (text, conn, res) => {
+Coordenador.prototype.getAll = (text, conn, res, req) => {
     conn.connect((err, client, release) => {
         client.query(text, (err, result) => {
             release();
@@ -44,7 +44,12 @@ Coordenador.prototype.getAll = (text, conn, res) => {
                     ativo: result.rows[i].ativo == false ? "Inativo" : "Ativo"
                 });
             }
-            res.render("coordenador", { title: "Coordenador", script: "coordenadorScript", data: values });
+            res.render("coordenador", { 
+                title: "Coordenador", 
+                script: "coordenadorScript", 
+                data: values,
+                usuarioLogado: req.session.usuario 
+            });
         });
     });
 }

@@ -8,7 +8,7 @@ exports.coordenador = (req, res) => {
     }
     var coordenador = new coordenadorModel();
     var text = "select * from coordenador";
-    coordenador.getAll(text, connection, res);
+    coordenador.getAll(text, connection, res, req);
 };
 
 exports.getOne = (req, res) => {
@@ -49,5 +49,10 @@ exports.remover = (req, res) => {
     var values = [req.params.id];
 
     coordenador.executar(text, values, connection);
-    res.render("coordenador", { title: "Coordenador", script: "coordenadorScript", data: values });
+    res.render("coordenador", { 
+        title: "Coordenador", 
+        script: "coordenadorScript", 
+        data: values,
+        usuarioLogado: req.session.usuario 
+    });
 }

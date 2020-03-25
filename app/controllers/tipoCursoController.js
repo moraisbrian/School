@@ -8,7 +8,7 @@ exports.tipoCurso = (req, res) => {
     }
     var tipoCurso = new tipoCursoModel();
     var text = "select * from tipo_curso";
-    tipoCurso.getAll(text, connection, res);
+    tipoCurso.getAll(text, connection, res, req);
 }
 
 exports.getOne = (req, res) => {
@@ -49,5 +49,10 @@ exports.remover = (req, res) => {
     var values = [req.params.id];
 
     tipoCurso.executar(text, values, connection);
-    res.render("tipocurso", { title: "Tipo Curso", script: "tipoCursoScript", data: values });
+    res.render("tipocurso", { 
+        title: "Tipo Curso", 
+        script: "tipoCursoScript", 
+        data: values,
+        usuarioLogado: req.session.usuario 
+    });
 }

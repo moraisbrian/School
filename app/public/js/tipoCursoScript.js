@@ -1,25 +1,7 @@
 $(document).ready(function() {
-    //#region Navegação
-	$("#btnTipoCurso").on("click", function () {
-		window.location.href = "/tipocurso";
-	});
-
-	$("#btnCoordenador").on("click", function () {
-		window.location.href = "/coordenador";
-	});
-
-	$("#btnAluno").on("click", function () {
-		window.location.href = "/aluno";
-	});
-
-	$("#btnCurso").on("click", function () {
-		window.location.href = "/curso";
-	});
-
 	$("#btnSair").on("click", function () {
 		window.location.href = "/autenticar/sair";
 	});
-    //#endregion
     
     $(".btnDeletarTipoCurso").on("click", function () {
 		let resposta = confirm("Deseja realmente deletar?");

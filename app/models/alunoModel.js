@@ -32,7 +32,7 @@ Aluno.prototype.getOneAluno = (text, values, conn, res) => {
     });
 }
 
-Aluno.prototype.getAll = (text, conn, res) => {
+Aluno.prototype.getAll = (text, conn, res, req) => {
     conn.connect((err, client, release) => {
         client.query(text, (err, result) => {
             release();
@@ -46,7 +46,12 @@ Aluno.prototype.getAll = (text, conn, res) => {
                     curso: result.rows[i].curso
                 });
             }
-            res.render("aluno", { title: "Aluno", script: "alunoScript", aluno: values });
+            res.render("aluno", { 
+                title: "Aluno", 
+                script: "alunoScript", 
+                aluno: values, 
+                usuarioLogado: req.session.usuario 
+            });
         });
     });
 }

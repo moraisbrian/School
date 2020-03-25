@@ -12,7 +12,7 @@ TipoCurso.prototype.executar = (text, values, conn) => {
     });
 }
 
-TipoCurso.prototype.getAll = (text, conn, res) => {
+TipoCurso.prototype.getAll = (text, conn, res, req) => {
     conn.connect((err, client, release) => {
         client.query(text, (err, result) => {
             release();
@@ -24,7 +24,12 @@ TipoCurso.prototype.getAll = (text, conn, res) => {
                     ativo: result.rows[i].ativo == false ? "Inativo" : "Ativo"
                 });
             }
-            res.render("tipocurso", { title: "Tipo Curso", script: "tipoCursoScript", data: values });
+            res.render("tipocurso", { 
+                title: "Tipo Curso", 
+                script: "tipoCursoScript", 
+                data: values,
+                usuarioLogado: req.session.usuario 
+            });
         });
     });
 }
