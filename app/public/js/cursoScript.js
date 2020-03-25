@@ -1,9 +1,5 @@
 $(document).ready(function() {
     //#region Navegação
-	$("#btnInicio").on("click", function () {
-		window.location.href = "/";
-	});
-
 	$("#btnTipoCurso").on("click", function () {
 		window.location.href = "/tipocurso";
 	});
@@ -18,6 +14,10 @@ $(document).ready(function() {
 
 	$("#btnCurso").on("click", function () {
 		window.location.href = "/curso";
+	});
+
+	$("#btnSair").on("click", function () {
+		window.location.href = "/autenticar/sair";
 	});
     //#endregion
     

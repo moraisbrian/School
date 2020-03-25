@@ -2,12 +2,20 @@ const connection = require("../../config/dbConnection");
 const tipoCursoModel = require("../models/tipoCursoModel");
 
 exports.tipoCurso = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var tipoCurso = new tipoCursoModel();
     var text = "select * from tipo_curso";
     tipoCurso.getAll(text, connection, res);
 }
 
 exports.getOne = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var tipoCurso = new tipoCursoModel();
     var text = "select * from tipo_curso where id = $1";
     var values = [req.params.id];
@@ -15,6 +23,10 @@ exports.getOne = (req, res) => {
 }
 
 exports.salvar = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var tipoCurso = new tipoCursoModel();
     if (parseInt(req.body.id) !== 0) {
         var text = "update tipo_curso set identificacao = $1, ativo = $2 where id = $3";
@@ -28,6 +40,10 @@ exports.salvar = (req, res) => {
 }
 
 exports.remover = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var tipoCurso = new tipoCursoModel();
     var text = "delete from tipo_curso where id = $1";
     var values = [req.params.id];

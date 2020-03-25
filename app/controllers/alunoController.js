@@ -2,6 +2,10 @@ const connection = require("../../config/dbConnection");
 const alunoModel = require("../models/alunoModel");
 
 exports.aluno = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var aluno = new alunoModel();
     var text = "select aluno.id as id, ";
     text += "aluno.nome as nome, ";
@@ -15,6 +19,10 @@ exports.aluno = (req, res) => {
 }
 
 exports.getOneAluno = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var aluno = new alunoModel();
     var text = "select * from aluno where id = $1";
     var values = [req.params.id];
@@ -22,6 +30,10 @@ exports.getOneAluno = (req, res) => {
 }
 
 exports.salvar = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var aluno = new alunoModel();
     if (parseInt(req.body.id) !== 0) {
         var text = "update aluno set ";
@@ -46,6 +58,10 @@ exports.salvar = (req, res) => {
 }
 
 exports.remover = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var aluno = new alunoModel();
     var text = "delete from aluno where id = $1";
     var values = [req.params.id];
@@ -55,6 +71,10 @@ exports.remover = (req, res) => {
 }
 
 exports.getCurso = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var aluno = new alunoModel();
     var text = "select * from curso";
     aluno.getCurso(text, connection, res);

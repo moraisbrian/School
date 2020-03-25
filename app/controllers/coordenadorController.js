@@ -2,12 +2,20 @@ const coordenadorModel = require("../models/coordenadorModel");
 const connection = require("../../config/dbConnection");
 
 exports.coordenador = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var coordenador = new coordenadorModel();
     var text = "select * from coordenador";
     coordenador.getAll(text, connection, res);
 };
 
 exports.getOne = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var coordenador = new coordenadorModel();
     var text = "select * from coordenador where id = $1";
     var values = [req.params.id];
@@ -15,6 +23,10 @@ exports.getOne = (req, res) => {
 }
 
 exports.salvar = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var coordenador = new coordenadorModel();
     if (parseInt(req.body.id) !== 0) {
         var text = "update coordenador set nome = $1, sobrenome = $2, ativo = $3 where id = $4";
@@ -28,6 +40,10 @@ exports.salvar = (req, res) => {
 }
 
 exports.remover = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var coordenador = new coordenadorModel();
     var text = "delete from coordenador where id = $1";
     var values = [req.params.id];

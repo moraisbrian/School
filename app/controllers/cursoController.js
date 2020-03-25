@@ -2,6 +2,10 @@ const connection = require("../../config/dbConnection");
 const cursoModel = require("../models/cursoModel");
 
 exports.curso = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var curso = new cursoModel();
     var text = "select curso.id as id, ";
     text += "curso.identificacao as identificacao, ";
@@ -16,18 +20,30 @@ exports.curso = (req, res) => {
 }
 
 exports.getCoordenador = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var curso = new cursoModel();
     var text = "select * from coordenador";
     curso.getCoordenador(text, connection, res);
 }
 
 exports.getTipo = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var curso = new cursoModel();
     var text = "select * from tipo_curso";
     curso.getTipo(text, connection, res);
 }
 
 exports.salvar = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var curso = new cursoModel();
     if (parseInt(req.body.id) !== 0) {
         var text = "update curso set identificacao = $1, ativo = $2, tipoid = $3, coordenadorid = $4 where id = $5";
@@ -41,6 +57,10 @@ exports.salvar = (req, res) => {
 }
 
 exports.getOne = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var curso = new cursoModel();
     var text = "select curso.id as id, ";
     text += "curso.identificacao as identificacao, ";
@@ -59,6 +79,10 @@ exports.getOne = (req, res) => {
 }
 
 exports.remover = (req, res) => {
+    if (req.session.autorizado !== true) {
+        res.redirect("/");
+        return;
+    }
     var curso = new cursoModel();
     var text = "delete from curso where id = $1";
     var values = [req.params.id];
