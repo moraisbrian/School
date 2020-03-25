@@ -27,3 +27,14 @@ CREATE TABLE curso(
     constraint fk_coordenador foreign key (coordenadorId)
     references coordenador (id)
 );
+
+CREATE TABLE aluno(
+    id serial primary key,
+    nome varchar(50) not null,
+    sobrenome varchar(50) not null,
+    ativo boolean,
+    dataCadastro timestamp default now(),
+    cursoId int,
+    constraint fk_curso foreign key (cursoId)
+    references curso (id)
+);
