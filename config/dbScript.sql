@@ -38,3 +38,9 @@ CREATE TABLE aluno(
     constraint fk_curso foreign key (cursoId)
     references curso (id)
 );
+
+CREATE TABLE tb_login(
+    id serial primary key,
+    usuario varchar(32) not null,
+    senha varchar(32) not null
+);
