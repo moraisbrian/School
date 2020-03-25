@@ -33,5 +33,5 @@ exports.remover = (req, res) => {
     var values = [req.params.id];
 
     coordenador.executar(text, values, connection);
-    res.render("coordenador", { title: "Coordenador", data: values });
+    res.render("coordenador", { title: "Coordenador", script: "coordenadorScript", data: values });
 }

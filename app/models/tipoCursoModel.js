@@ -24,7 +24,7 @@ TipoCurso.prototype.getAll = (text, conn, res) => {
                     ativo: result.rows[i].ativo == false ? "Inativo" : "Ativo"
                 });
             }
-            res.render("tipocurso", { title: "Tipo Curso", data: values });
+            res.render("tipocurso", { title: "Tipo Curso", script: "tipoCursoScript", data: values });
         });
     });
 }

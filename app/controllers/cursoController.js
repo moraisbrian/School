@@ -64,5 +64,5 @@ exports.remover = (req, res) => {
     var values = [req.params.id];
 
     curso.executar(text, values, connection);
-    res.render("curso", { title: "Curso", data: values });
+    res.render("curso", { title: "Curso", script: "cursoScript", data: values });
 }

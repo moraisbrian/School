@@ -58,7 +58,7 @@ Curso.prototype.getAll = (text, conn, res) => {
                     ativo: result.rows[i].ativo == false ? "Inativo" : "Ativo"
                 });
             }
-            res.render("curso", { title: "Curso", data: values });
+            res.render("curso", { title: "Curso", script: "cursoScript", data: values });
         });
     });
 }

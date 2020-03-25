@@ -33,5 +33,5 @@ exports.remover = (req, res) => {
     var values = [req.params.id];
 
     tipoCurso.executar(text, values, connection);
-    res.render("tipocurso", { title: "Tipo Curso", data: values });
+    res.render("tipocurso", { title: "Tipo Curso", script: "tipoCursoScript", data: values });
 }

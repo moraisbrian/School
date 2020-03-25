@@ -44,7 +44,7 @@ Coordenador.prototype.getAll = (text, conn, res) => {
                     ativo: result.rows[i].ativo == false ? "Inativo" : "Ativo"
                 });
             }
-            res.render("coordenador", { title: "Coordenador", data: values });
+            res.render("coordenador", { title: "Coordenador", script: "coordenadorScript", data: values });
         });
     });
 }
